@@ -1,7 +1,10 @@
+import threading
 import tkinter
-import time
-from threading import Thread
 from tkinter import *
+
+from Socket import Socket
+
+
 class Sender_ui:
     porturi=[0, 0]
     dip=""
@@ -13,18 +16,30 @@ class Sender_ui:
         Sender_ui.porturi[0] = int(self.entry1.get())
         Sender_ui.porturi[1] =int(self.entry2.get())
         Sender_ui.dip = self.entry3.get()
-        print("sleep time start")
-
-        for i in range(10):
-            print(i)
-            time.sleep(1)
-
-        print("sleep time stop")
-        return
+        self.s = Socket()
+        self.s.creare()
+        try:
+            self.s.receiveRunning = True
+            print("Create  threads")
+            self.receive_thread = threading.Thread(target=self.s.receive_fct)
+            self.receive_thread.start()
+        except:
+            print("Eroare la pornirea   thread‐urilor")
+            sys.exit()
 
     def getText(self):
         Sender_ui.text=self.entry4.get()
         print(Sender_ui.text)
+        try:
+
+            self.s.sendRunning = True
+            print("Create  threads")
+            self.send_thread = threading.Thread(target=self.s.send_fct)
+            self.send_thread.start()
+
+        except:
+            print("Eroare la pornirea   thread‐urilor")
+            sys.exit()
         return
 
     def afisare(self):
@@ -49,8 +64,6 @@ class Sender_ui:
         bunttonSend =tkinter.Button(self.fereastra,text="Send", command=self.getText).place(x=350, y=190)
         self.fereastra.mainloop()
 
-    def threading(self):
-        t1 = Thread(target=self.setConnectionInfo)
-        t1.start()
+
 
 
