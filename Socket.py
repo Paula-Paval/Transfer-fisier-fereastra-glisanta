@@ -24,9 +24,8 @@ class Socket:
                 data, address = self.s.recvfrom(1024)
                 print("S-a receptionat ", str(data), " de la ", address)
                 print("Contor= ", contor)
-                if(str(data)=="b'stop'"):
+                if(str(data)=="b'stop'"):##se va schimba odata cu implementarea
                     print("Stop threads")
-                    self.receiveRunning=False
                     self.sendRunning=False
 
 
@@ -38,7 +37,6 @@ class Socket:
                 data=sender_ui.Sender_ui.text
                 if(data=="stop"):
                     print("Stop threads")
-                    self.receiveRunning = False
                     self.sendRunning = False
                 else:
                     self.s.sendto(bytes(data, encoding="ascii"), (sender_ui.Sender_ui.dip, sender_ui.Sender_ui.porturi[1]))
