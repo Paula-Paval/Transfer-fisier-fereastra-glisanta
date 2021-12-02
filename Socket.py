@@ -26,24 +26,9 @@ class Socket:
                 data, address = self.s.recvfrom(1024)
                 print("S-a receptionat ", str(data), " de la ", address)
                 print("Contor= ", contor)
+                self.s.sendto(bytes(str(data), encoding="ascii"), (receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
                 if(str(data)=="b'stop'"):
                     print("Stop threads")
-                    self.receiveRunning=False
                     self.sendRunning=False
-
-
-    def send_fct(self):
-        print("Send function")
-        while self.sendRunning:
-                data=receiver_ui.Receiver_ui.text
-                if (data == "stop"):
-                    print("Stop threads")
-                    self.receiveRunning = False
-                    self.sendRunning = False
-                else:
-                    self.s.sendto(bytes(data, encoding="ascii"), (receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
-
-
-
 
 
