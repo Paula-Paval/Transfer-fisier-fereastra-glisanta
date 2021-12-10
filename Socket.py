@@ -33,13 +33,14 @@ class Socket:
         print("Send function")
         print(sender_ui.Sender_ui.porturi[1])
         print(sender_ui.Sender_ui.dip)
-        while self.sendRunning:
-                data=sender_ui.Sender_ui.text
-                if(data=="stop"):
-                    print("Stop threads")
-                    self.sendRunning = False
-                else:
-                    self.s.sendto(bytes(data, encoding="ascii"), (sender_ui.Sender_ui.dip, sender_ui.Sender_ui.porturi[1]))
+   #     while self.sendRunning:
+        data=sender_ui.Sender_ui.jsonContenToSend
+        ##algoritm
+        if(data=="stop"):
+            print("Stop threads")
+            self.sendRunning = False
+        else:
+            self.s.sendto(bytes(data, encoding="ascii"), (sender_ui.Sender_ui.dip, sender_ui.Sender_ui.porturi[1]))
 
 
 

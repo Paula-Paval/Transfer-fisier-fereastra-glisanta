@@ -1,14 +1,19 @@
 import threading
 import tkinter
-from tkinter import *
 
+from tkinter import *
+from tkinter import filedialog
+
+from SerializareFisier import Serializare
 from Socket import Socket
 
 
 class Sender_ui:
     porturi=[0, 0]
     dip=""
-    text=""
+   # text=""
+    jsonContenToSend=[]
+    filename=""
     def __init__(self, nume):
         self.fereastra=Tk(className=nume)
 
@@ -27,9 +32,11 @@ class Sender_ui:
             print("Eroare la pornirea   thread‐urilor")
             sys.exit()
 
+
     def getText(self):
-        Sender_ui.text=self.entry4.get()
-        print(Sender_ui.text)
+    #    Sender_ui.text=self.entry4.get()
+    #   print(Sender_ui.text)
+        Sender_ui.jsonContenToSend=Serializare( Sender_ui.filename).serializare()
         try:
             self.s.sendRunning = True
             print("Create  threads")
@@ -42,6 +49,15 @@ class Sender_ui:
         return
     def Disconnect(self):
         self.s.receiveRunning=False
+
+    def browseFiles(self):
+        Sender_ui.filename = filedialog.askopenfilename(initialdir="/",
+                                              title="Select a File",
+                                              filetypes=(("Text files",
+                                                          "*.txt*"),
+                                                         ("all files",
+                                                          "*.*")))
+        self.entry4.insert(0,Sender_ui.filename)
 
     def afisare(self):
         self.fereastra.geometry("500x500")
@@ -59,12 +75,14 @@ class Sender_ui:
         self.entry3.place(x=150, y=80)
         bunttonConnect=tkinter.Button(self.fereastra,text="Connect", command=self.setConnectionInfo ).place(x=300, y=110)
         bunttonDisconnect = tkinter.Button(self.fereastra, text="Disconnect", command=self.Disconnect).place(x=100,y=110)
-        self.l4=Label(self.fereastra, text="Mesaj de trimis")
+        self.l4=Label(self.fereastra, text="Fisier de trimis")
         self.l4.place(x=60, y=160)
         self.entry4=tkinter.Entry(self.fereastra,width="40")
         self.entry4.place(x=160, y=160)
         bunttonSend =tkinter.Button(self.fereastra,text="Send", command=self.getText).place(x=350, y=190)
+        browseButton=tkinter.Button(self.fereastra, text="Browse", command=self.browseFiles).place(x=400, y=190)
         self.fereastra.mainloop()
+
 
 
 
