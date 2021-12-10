@@ -23,13 +23,14 @@ class Socket:
             if not r:
                 contor = contor + 1
             else:
+                #Se va crea lista de pachete
                 data, address = self.s.recvfrom(1024)
                 print("S-a receptionat ", str(data), " de la ", address)
                 print("Contor= ", contor)
                 self.s.sendto(bytes(str(data), encoding="ascii"),(receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
-                if(str(data)=="b'stop'"):
-                    print("Stop threads")
-                    self.sendRunning=False
+                #if(str(data)=="b'stop'"):
+                    #print("Stop threads")
+                    #self.sendRunning=False
 
 
 

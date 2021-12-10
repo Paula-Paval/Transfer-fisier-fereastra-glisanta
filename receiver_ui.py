@@ -2,6 +2,7 @@ import threading
 import tkinter
 from tkinter import *
 
+from Deserealizare import Deserealizare
 from Socket import Socket
 
 
@@ -31,6 +32,10 @@ class Receiver_ui:
 
     def Disconnect(self):
         self.s.receiveRunning=False
+        self.sendRunning = False
+
+    def ShowText(self, lista_json):
+        self.entry4.insert(0,Deserealizare().deserealizare(lista_json))
 
     def afisare(self):
         self.fereastra.geometry("500x500")
@@ -48,7 +53,10 @@ class Receiver_ui:
         self.entry3.place(x=150, y=80)
         bunttonConnect = tkinter.Button(self.fereastra, text="Connect", command=self.setConnectionInfo).place(x=300, y=110)
         bunttonDisconnect = tkinter.Button(self.fereastra, text="Disconnect", command=self.Disconnect).place(x=100, y=110)
-
+        self.l4 = Label(self.fereastra, text="Mesaj primit")
+        self.l4.place(x=50, y=180)
+        self.entry4= tkinter.Text(self.fereastra, height = 15, width = 52)
+        self.entry4.place(x=50, y=200)
 
         self.fereastra.mainloop()
 
