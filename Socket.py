@@ -38,6 +38,7 @@ class Socket:
         ##algoritm
         if(data=="stop"):
             print("Stop threads")
+
             self.sendRunning = False
         else:
             self.s.sendto(bytes(data, encoding="ascii"), (sender_ui.Sender_ui.dip, sender_ui.Sender_ui.porturi[1]))
