@@ -30,7 +30,3 @@ class Serializare:
             list.append(dic)
 
         return list
-
-        # out_file = open("test2.json", "w")
-        # json.dump(list, out_file, indent=4)
-        # out_file.close()
