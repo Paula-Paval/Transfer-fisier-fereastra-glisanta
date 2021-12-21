@@ -1,3 +1,4 @@
+import json
 import select
 import socket
 
@@ -7,6 +8,7 @@ import receiver_ui
 class Socket:
     receiveRunning=False
     sendRunning=False
+    list=[]
 
     def creare(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
@@ -27,7 +29,10 @@ class Socket:
                 data, address = self.s.recvfrom(1024)
                 print("S-a receptionat ", str(data), " de la ", address)
                 print("Contor= ", contor)
-                self.s.sendto(bytes(str(data), encoding="ascii"),(receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
+                self.list.append(str(data))
+                pachet = json.loads(str(data))['nr_pachet']
+                confirm={'nr_pachet': pachet}
+                self.s.sendto(bytes(json.dumps(confirm), encoding='ascii'),(receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
                 #if(str(data)=="b'stop'"):
                     #print("Stop threads")
                     #self.sendRunning=False
