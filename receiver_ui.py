@@ -10,6 +10,7 @@ class Receiver_ui:
     porturi = [0, 0]
     dip = ""
     text = ""
+    lista_json=[{}]
 
     def __init__(self, nume):
         self.fereastra = Tk(className=nume)
@@ -34,8 +35,8 @@ class Receiver_ui:
         self.s.receiveRunning=False
         self.sendRunning = False
 
-    def ShowText(self, lista_json):
-        self.entry4.insert(0,Deserealizare().deserealizare(lista_json))
+    def ShowText(self):
+        self.entry4.insert(tkinter.END,Deserealizare().deserealizare(self.lista_json))
 
     def afisare(self):
         self.fereastra.geometry("500x500")
@@ -57,6 +58,7 @@ class Receiver_ui:
         self.l4.place(x=50, y=180)
         self.entry4= tkinter.Text(self.fereastra, height = 15, width = 52)
         self.entry4.place(x=50, y=200)
+        buttonShow= tkinter.Button(self.fereastra, text="Text", command=self.ShowText).place(x=130, y=175)
 
         self.fereastra.mainloop()
 

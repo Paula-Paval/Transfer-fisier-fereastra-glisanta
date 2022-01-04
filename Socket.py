@@ -9,6 +9,7 @@ class Socket:
     receiveRunning=False
     sendRunning=False
     list=[]
+    text=""
 
     def creare(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
@@ -27,15 +28,21 @@ class Socket:
             else:
                 #Se va crea lista de pachete
                 data, address = self.s.recvfrom(1024)
-                print("S-a receptionat ", str(data), " de la ", address)
-                print("Contor= ", contor)
-                self.list.append(str(data))
-                pachet = json.loads(str(data))['nr_pachet']
+                #print("S-a receptionat ", str(data), " de la ", address)
+               # print("Contor= ", contor)
+                strings=str(data).split("b'")
+                split=strings[1].split("'")
+                dic = {"nr_pachet": json.loads(split[0])['nr_pachet'], "data": json.loads(split[0])['data'], "numar_pachete": json.loads(split[0])['numar_pachete']}
+                self.list.append(dic)
+                print(str(split[0]))
+                pachet = json.loads(split[0])['nr_pachet']
+                totalPachete=json.loads(split[0])['numar_pachete']
                 confirm={'nr_pachet': pachet}
                 self.s.sendto(bytes(json.dumps(confirm), encoding='ascii'),(receiver_ui.Receiver_ui.dip, receiver_ui.Receiver_ui.porturi[1]))
-                #if(str(data)=="b'stop'"):
-                    #print("Stop threads")
-                    #self.sendRunning=False
+                print(json.dumps(confirm))
+                if(str(pachet)==str(totalPachete)):
+                    receiver_ui.Receiver_ui.lista_json=self.list
+
 
 
 

@@ -1,17 +1,19 @@
-
+import json
 
 class Deserealizare:
+
     def deserealizare(self, lista_pachete):
         lista = []
-        #data = json.load(lista_pachete)
+        data = lista_pachete
 
-        nr = lista_pachete[0]['numar_pachete']
+        nr = data[0]['numar_pachete']
         print(nr)
 
         text = ""
         for i in range(0, nr):
-            text = text + lista_pachete[i]['data']
-            dictionar = {'nr_pachet': lista_pachete[i]['nr_pachet']}
+            text = text + data[i]['data']
+            dictionar = {'nr_pachet': data[i]['nr_pachet']}
             lista.append(dictionar)
 
+        print(text)
         return text
