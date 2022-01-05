@@ -11,6 +11,7 @@ class Receiver_ui:
     dip = ""
     text = ""
     lista_json=[{}]
+    probabilitate=0.0
 
     def __init__(self, nume):
         self.fereastra = Tk(className=nume)
@@ -19,6 +20,7 @@ class Receiver_ui:
         Receiver_ui.porturi[0] = int(self.entry1.get())
         Receiver_ui.porturi[1] = int(self.entry2.get())
         Receiver_ui.dip = self.entry3.get()
+        Receiver_ui.probabilitate=float(self.entry5.get())
         self.s = Socket()
         self.s.creare()
         try:
@@ -59,6 +61,10 @@ class Receiver_ui:
         self.entry4= tkinter.Text(self.fereastra, height = 15, width = 52)
         self.entry4.place(x=50, y=200)
         buttonShow= tkinter.Button(self.fereastra, text="Text", command=self.ShowText).place(x=130, y=175)
+        self.l5 = Label(self.fereastra, text="Probabilitate\n(un numar real intre 0 si 1)")
+        self.l5.place(x=250, y=40)
+        self.entry5 = tkinter.Entry(self.fereastra, width="7")
+        self.entry5.place(x=360, y=40)
 
         self.fereastra.mainloop()
 
