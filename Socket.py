@@ -8,12 +8,11 @@ import time
 class Socket:
     receiveRunning=False
     sendRunning=False
-    index=0
     ak=1
     last=0
     list = []  # fereasra
     dim =0 # dimensiune fereastra se va citi din ui
-    left=1
+
 
 
     def creare(self):
