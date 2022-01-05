@@ -9,7 +9,6 @@ from Socket import Socket
 class Receiver_ui:
     porturi = [0, 0]
     dip = ""
-    text = ""
     lista_json=[{}]
     probabilitate=0.0
 

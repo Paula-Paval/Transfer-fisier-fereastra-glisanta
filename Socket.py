@@ -12,7 +12,6 @@ class Socket:
     receiveRunning=False
     sendRunning=False
     list=[]
-    text=""
     last=1
 
     def creare(self):
