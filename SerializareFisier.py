@@ -1,6 +1,8 @@
 import json
 import math
 
+import sender_ui
+
 
 class Serializare:
 
@@ -12,13 +14,13 @@ class Serializare:
             text = f.read()
             nrofchar = len(text)
             print(nrofchar)
-            nr_pachete = math.ceil(nrofchar / 3)
+            nr_pachete = math.ceil(nrofchar / sender_ui.Sender_ui.dimensiune)
             print(nr_pachete)
             nr = 0
             data = ""
             num_pachet = 1
             for caracter in text:
-                if (nr % 3 == 0 and nr != 0):
+                if (nr % sender_ui.Sender_ui.dimensiune == 0 and nr != 0):
                     dic = {"nr_pachet": num_pachet, "data": data, "numar_pachete": nr_pachete}
                     num_pachet = num_pachet + 1
                     list.append(dic)

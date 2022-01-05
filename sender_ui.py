@@ -14,6 +14,8 @@ class Sender_ui:
    # text=""
     jsonContenToSend=[]
     filename=""
+    dimensiune=0
+    timp=0
     def __init__(self, nume):
         self.fereastra=Tk(className=nume)
 
@@ -21,6 +23,9 @@ class Sender_ui:
         Sender_ui.porturi[0] = int(self.entry1.get())
         Sender_ui.porturi[1] =int(self.entry2.get())
         Sender_ui.dip = self.entry3.get()
+        Sender_ui.dimensiune=int(self.entry5.get())
+        Sender_ui.timp=int(self.entry6.get())
+
         self.s = Socket()
         self.s.creare()
         try:
@@ -81,6 +86,14 @@ class Sender_ui:
         self.entry4.place(x=160, y=160)
         bunttonSend =tkinter.Button(self.fereastra,text="Send", command=self.getText).place(x=350, y=190)
         browseButton=tkinter.Button(self.fereastra, text="Browse", command=self.browseFiles).place(x=400, y=190)
+        self.l5 = Label(self.fereastra, text="Dimensiune fereastra")
+        self.l5.place(x=250, y=40)
+        self.entry5 = tkinter.Entry(self.fereastra, width="10")
+        self.entry5.place(x=370, y=40)
+        self.l6 = Label(self.fereastra, text="Timp de asteptare in secunde")
+        self.l6.place(x=250, y=60)
+        self.entry6 = tkinter.Entry(self.fereastra, width="7")
+        self.entry6.place(x=420, y=60)
         self.fereastra.mainloop()
 
 
